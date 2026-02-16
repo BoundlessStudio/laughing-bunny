@@ -9,6 +9,7 @@ import { nitro } from 'nitro/vite'
 
 const config = defineConfig({
   resolve: {
+    dedupe: ['react', 'react-dom'],
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
@@ -21,7 +22,11 @@ const config = defineConfig({
       projects: ['./tsconfig.json'],
     }),
     tailwindcss(),
-    tanstackStart(),
+    tanstackStart({
+      router: {
+        routeFileIgnorePattern: '\\.test\\.(ts|tsx)$',
+      },
+    }),
     viteReact(),
   ],
 })

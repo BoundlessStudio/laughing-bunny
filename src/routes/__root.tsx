@@ -1,8 +1,8 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
-import { TanStackDevtools } from '@tanstack/react-devtools'
-
-import Header from '../components/Header'
+// import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
+// import { TanStackDevtools } from '@tanstack/react-devtools'
+import { FlickeringGrid } from "@/components/ui/flickering-grid"
+import { TooltipProvider } from "@/components/ui/tooltip"
 
 import appCss from '../styles.css?url'
 
@@ -17,7 +17,7 @@ export const Route = createRootRoute({
         content: 'width=device-width, initial-scale=1',
       },
       {
-        title: 'TanStack Start Starter',
+        title: 'laughing-bunny',
       },
     ],
     links: [
@@ -37,11 +37,19 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <Header />
-        {children}
-        <TanStackDevtools
+        <FlickeringGrid
+          className="absolute inset-0 z-0 size-full"
+          squareSize={4}
+          gridGap={6}
+          color="#E7ECEF"
+          maxOpacity={0.5}
+          flickerChance={0.1}
+        />
+        <TooltipProvider>{children}</TooltipProvider>
+
+        {/* <TanStackDevtools
           config={{
-            position: 'bottom-right',
+            position: 'bottom-left',
           }}
           plugins={[
             {
@@ -49,7 +57,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
               render: <TanStackRouterDevtoolsPanel />,
             },
           ]}
-        />
+        /> */}
+
         <Scripts />
       </body>
     </html>
